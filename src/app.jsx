@@ -1,72 +1,29 @@
-import { useState } from 'preact/hooks'
-
-const nodes = [
-
-];
+import { useState } from "preact/hooks";
 
 const map = [
-  {row1: []},
-  {row2: []},
-  {row3: []},
-  {row4: []},
-  {row5: []},
-]
-
-const createNodes = () => {
-    for(let i = 0; i < 19; i++) {
-      let position = "";
-      if(i <= 2) {
-        map[0].row1.push({value: i, position: position})
-      } else if (i <= 6) {
-        map[1].row2.push({value: i, position: position})
-      } else if (i <= 11) {
-        map[2].row3.push({value: i, position: position})
-      } else if (i <= 15) {
-        map[3].row4.push({value: i, position: position})
-      } else if (i <= 18) {
-        map[4].row5.push({value: i, position: position})
-      } else {
-        console.log("error in node map");
-      }
-        
-      nodes.push({value: i, position: position});
-    }
-}
+  { row: [0, 1, 2] },
+  { row: [3, 4, 5, 6] },
+  { row: [7, 8, 9, 10, 11] },
+  { row: [12, 13, 14, 15] },
+  { row: [16, 17, 18] },
+];
 
 export function App() {
-
-  const nodesState = [nodes, setNodes] = useState(0);
-
-  createNodes();
-  console.log(nodes);
-  console.log(map);
+  const [selectedNode, setSelectedNode] = useState(0);
+  
   return (
-    <div className='w-full flex flex-col justify-center items-center'>
-    <div className='flex flex-row'>
-      {map[0].row1.map(row => (
-        <div className='w-20 h-20 bg-blue-600 border mask mask-hexagon'>{row.value} {row.position}</div>
-      ))}
+    <div className="w-full h-screen flex-col items-center justify-center flex">
+      {map.map((obj, id) => {
+        return (
+          <div className="flex flex-row">
+          {obj.row.map((node) => {
+            return (
+              <div onClick={() => setSelectedNode(node)} className="bg-emerald-400 w-20 h-20 mask mask-hexagon text-white flex items-center justify-center hover:bg-black cursor-pointer">{node}</div>
+            );
+          })}
+          </div>
+        )
+      })}
     </div>
-    <div className='flex flex-row'>
-      {map[1].row2.map(row => (
-        <div className='w-20 h-20 bg-blue-600 border mask mask-hexagon'>{row.value} {row.position}</div>
-      ))}
-    </div>
-    <div className='flex flex-row'>
-      {map[2].row3.map(row => (
-        <div className='w-20 h-20 bg-blue-600 border mask mask-hexagon'>{row.value} {row.position}</div>
-      ))}
-    </div>
-    <div className='flex flex-row'>
-      {map[3].row4.map(row => (
-        <div className='w-20 h-20 bg-blue-600 border mask mask-hexagon'>{row.value} {row.position}</div>
-      ))}
-    </div>
-    <div className='flex flex-row'>
-      {map[4].row5.map(row => (
-        <div className='w-20 h-20 bg-blue-600 border mask mask-hexagon'>{row.value} {row.position}</div>
-      ))}
-    </div>
-    </div>
-  )
+  );
 }
