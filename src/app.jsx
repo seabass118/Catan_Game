@@ -9,20 +9,25 @@ const map = [
 ];
 
 export function App() {
-  const [selectedNode, setSelectedNode] = useState(0);
-  
+  const [selectedNode, setSelectedNode] = useState(null);
+
   return (
     <div className="w-full h-screen flex-col items-center justify-center flex">
       {map.map((obj, id) => {
         return (
           <div className="flex flex-row">
-          {obj.row.map((node) => {
-            return (
-              <div onClick={() => setSelectedNode(node)} className="bg-emerald-400 w-20 h-20 mask mask-hexagon text-white flex items-center justify-center hover:bg-black cursor-pointer">{node}</div>
-            );
-          })}
+            {obj.row.map((node) => {
+              return (
+                <div
+                  //Set state for selected node
+                  className="bg-emerald-400 w-[100px] h-[100px] font-bold mask mask-hexagon text-white flex items-center justify-center hover:bg-black cursor-pointer"
+                >
+                  {node}
+                </div>
+              );
+            })}
           </div>
-        )
+        );
       })}
     </div>
   );
