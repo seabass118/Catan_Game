@@ -1,5 +1,7 @@
 import { useState } from "preact/hooks";
 
+import { Node } from "@components";
+
 const map = [
     {
         row: [
@@ -61,14 +63,12 @@ export function App() {
                     <div className="flex flex-row">
                         {obj.row.map((node, index) => {
                             return (
-                                <div
-                                    //Display node state data
-                                    onMouseOver={() => setSelectedNode([{id: node.id, position: index, row: id}])}
-                                    onMouseOut={() => setSelectedNode([])}
-                                    className="bg-emerald-400 w-[100px] h-[100px] font-bold mask mask-hexagon text-white flex items-center justify-center hover:opacity-50 cursor-pointer"
-                                >
-                                    {node.id}
-                                </div>
+                                <Node 
+                                    row={id} 
+                                    node={node.id} 
+                                    position={index} 
+                                    setSelectedNode={setSelectedNode}
+                                />
                             );
                         })}
                     </div>
